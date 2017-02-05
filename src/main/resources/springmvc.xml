@@ -13,9 +13,9 @@
     <context:component-scan base-package="cn.springmvc.annotation"/>
 
     <!-- 注解 映射器 -->
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
     <!-- 注解 适配器 -->
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" />
 
 
     <!-- 视图解析器 解析jsp视图, 默认使用jstl 要求classpath下要有jstl的jar包 -->
