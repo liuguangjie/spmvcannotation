@@ -12,10 +12,11 @@
     <title>editStudent</title>
 </head>
 <body>
-    <form action="${pageContext.request.contextPath}/api/savestudent" method="post">
-        <input type="text" name="name" value="${requestScope.student.name}"/><br/>
-        <input type="text" name="age" value="${requestScope.student.age}"/><br/>
-        <input type="text" name="birthday" value="<fmt:formatDate value="${requestScope.student.birthday}" pattern="yyyy-MM-dd"/>"/><br/>
+    <form action="${pageContext.request.contextPath}/api/stu/updatestudent" method="post">
+        <input type="hidden" name="student.id" value="${requestScope.student.id}"/>
+        <input type="text" name="student.name" value="${requestScope.student.name}"/><br/>
+        <input type="text" name="student.age" value="${requestScope.student.age}"/><br/>
+        <input type="text" name="student.birthday" value="<fmt:formatDate value="${requestScope.student.birthday}" pattern="yyyy-MM-dd"/>"/><br/>
 
         <input type="submit" value="submit"/>
     </form>

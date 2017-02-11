@@ -11,7 +11,6 @@
     <title>first springmvc</title>
 </head>
 <body>
-
-    ${message}
+    ${requestScope.message}
 </body>
 </html>

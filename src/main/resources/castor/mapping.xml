@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE databases PUBLIC
+        "-//EXOLAB/Castor Mapping DTD Version 1.0//EN"
+        "http://castor.exolab.org/mapping.dtd">
+<mapping>
+    <description>Basic mapping example</description>
+    <class name="cn.springmvc.bean.FlightBean" auto-complete="true">
+        <map-to xml="flight"/>
+        <field name="carrier">
+            <bind-xml name="carrier" node="attribute"/>
+        </field>
+        <field name="departureTime">
+            <bind-xml name="depart" node="attribute"/>
+        </field>
+        <field name="arrivalTime">
+            <bind-xml name="arrive" node="attribute"/>
+        </field>
+    </class>
+    <class name="cn.springmvc.bean.Student" auto-complete="true">
+        <map-to xml="student-info"/>
+        <field name="id">
+            <bind-xml name="id" node="element"/>
+        </field>
+        <field name="age">
+            <bind-xml name="age" node="element"/>
+        </field>
+        <field name="name">
+            <bind-xml name="name" node="element"/>
+        </field>
+    </class>
+</mapping>
