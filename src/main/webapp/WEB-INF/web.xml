@@ -41,7 +41,16 @@
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
 
-
+    <!-- rest 解决国际化问题  -->
+    <filter>
+        <filter-name>LocaleFilter</filter-name>
+        <filter-class>cn.springmvc.filter.LocaleFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LocaleFilter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+    <!-- 解决post乱码问题 -->
     <filter>
         <filter-name>characterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

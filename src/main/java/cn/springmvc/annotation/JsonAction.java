@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,14 +27,18 @@ public class JsonAction {
      curl -H "Accept:application/xml" -H "Content-Type:application/xml;charset=UTF-8" -X POST -d '<?xml version="1.0" encoding="UTF-8"?><student-info><id>23</id><age>11</age><name>haha</name></student-info>' \
      http://127.0.0.1:8080/api/json/request
 
+     巧妙运用国际化
+
      * @param student
      * @return
      */
 
     @RequestMapping("/request")
     @ResponseBody
-    public ResultList requestJson(@RequestBody Student student){
+    public ResultList requestJson(@RequestBody Student student, HttpServletRequest request){
         ResultList resultList=new ResultList();
+        System.out.println(request.getLocale().getLanguage());
+        resultList.setLocale(request.getLocale());
         List<Student> list=new ArrayList<Student>(1);
         list.add(student);
         Student st=new Student();
@@ -42,8 +47,7 @@ public class JsonAction {
         st.setId(33);
         list.add(st);
         resultList.setData(list);
-        resultList.setCode("00000");
-        resultList.setMessage("success");
+        resultList.setCode("00003");
         //System.out.println(stu);
         System.out.println(student);
         return resultList;

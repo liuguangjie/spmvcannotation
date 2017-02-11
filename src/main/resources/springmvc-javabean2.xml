@@ -10,6 +10,14 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd"
 >
     <description>spring mvc version is 3.1</description>
+    <!-- 国际化消息 -->
+    <bean id="messageSource" class="cn.springmvc.i18n.MessageSource">
+        <property name="basenames">
+            <array>
+                <value>i18n/messages</value>
+            </array>
+        </property>
+    </bean>
 
     <context:component-scan base-package="cn.springmvc.annotation"/>
     <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
