@@ -43,12 +43,12 @@
         <!--<property name="defaultContentType" value="application/xml"/>-->
 
         <!-- 扩展名至mimeType的映射,即 /user.json => application/json -->
-        <property name="mediaTypes">
+        <!--<property name="mediaTypes">
             <map>
                 <entry key="json" value="application/json" />
                 <entry key="xml" value="application/xml" />
             </map>
-        </property>
+        </property>-->
         <!-- 用于开启 /userinfo/123?format=json 的支持 -->
         <property name="favorParameter" value="true"/>
         <property name="viewResolvers">
