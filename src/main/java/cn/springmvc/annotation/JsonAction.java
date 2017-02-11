@@ -18,10 +18,12 @@ import java.util.List;
 public class JsonAction {
 
     /**
+     请求json 和返回json
      curl  -H "Content-Type:application/json;charset=UTF-8" -X POST -d '{"id":12,"name":"历史","age":21,"birthday":"2017-02-10"}' \
      http://127.0.0.1:8080/api/json/request
 
-     curl  -H "Content-Type:application/xml;charset=UTF-8" -X POST -d '<?xml version="1.0" encoding="UTF-8"?><student-info><id>23</id><age>11</age><name>haha</name></student-info>' \
+     请求xml 和返回xml
+     curl -H "Accept:application/xml" -H "Content-Type:application/xml;charset=UTF-8" -X POST -d '<?xml version="1.0" encoding="UTF-8"?><student-info><id>23</id><age>11</age><name>haha</name></student-info>' \
      http://127.0.0.1:8080/api/json/request
 
      * @param student
@@ -30,7 +32,7 @@ public class JsonAction {
 
     @RequestMapping("/request")
     @ResponseBody
-    public ResultList requestJson(@RequestBody Student student){
+    public Student requestJson(@RequestBody Student student){
         ResultList resultList=new ResultList();
         List<Student> list=new ArrayList<Student>(1);
         list.add(student);
@@ -39,6 +41,6 @@ public class JsonAction {
         resultList.setMessage("success");
         //System.out.println(stu);
         System.out.println(student);
-        return resultList;
+        return student;
     }
 }
