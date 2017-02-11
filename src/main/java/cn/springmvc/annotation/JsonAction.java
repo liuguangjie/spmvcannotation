@@ -32,15 +32,20 @@ public class JsonAction {
 
     @RequestMapping("/request")
     @ResponseBody
-    public Student requestJson(@RequestBody Student student){
+    public ResultList requestJson(@RequestBody Student student){
         ResultList resultList=new ResultList();
         List<Student> list=new ArrayList<Student>(1);
         list.add(student);
+        Student st=new Student();
+        st.setAge(55);
+        st.setName("jiji");
+        st.setId(33);
+        list.add(st);
         resultList.setData(list);
         resultList.setCode("00000");
         resultList.setMessage("success");
         //System.out.println(stu);
         System.out.println(student);
-        return student;
+        return resultList;
     }
 }

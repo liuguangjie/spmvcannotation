@@ -1,12 +1,11 @@
 package cn.springmvc.bean;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
 /**
  * Created by free on 17-2-2.
  */
-@XmlRootElement
+
 public class Student {
     private int id;
     private int age;
