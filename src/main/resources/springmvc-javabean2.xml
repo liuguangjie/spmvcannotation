@@ -18,7 +18,8 @@
             </array>
         </property>
     </bean>
-
+    <mvc:resources mapping="/js/**" location="/js/" cache-period="86400"/>
+    <mvc:resources mapping="/css/**" location="/css/" cache-period="86400"/>
     <context:component-scan base-package="cn.springmvc.annotation"/>
     <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
