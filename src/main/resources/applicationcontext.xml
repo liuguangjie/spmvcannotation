@@ -31,7 +31,15 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <!-- 缓存 管理 -->
+    <bean id="ehcacheCacheProvider" class="cn.springmvc.cache.EhcacheCacheProvider">
+        <property name="configLocation" value="classpath:ehcache.xml"/>
+        <property name="cacheName" value="eternalCache"/>
+    </bean>
 
+    <bean id="systemCacheManager" class="cn.springmvc.cache.SystemCacheManager" init-method="initCaches">
+        <property name="cacheProvider" ref="ehcacheCacheProvider"/>
+    </bean>
 
 
 </beans>
