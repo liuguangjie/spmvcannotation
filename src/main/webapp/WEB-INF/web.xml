@@ -31,7 +31,7 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:springmvc-freemark.xml</param-value>
+            <param-value>classpath:springmvc-javabean3.xml</param-value>
         </init-param>
         <load-on-startup>5</load-on-startup>
     </servlet>

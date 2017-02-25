@@ -31,12 +31,14 @@ public class LocaleRequestWrapper extends HttpServletRequestWrapper {
         HttpServletRequest request = (HttpServletRequest) getRequest();
 
         String language=request.getParameter("language");
+        Locale locale=null;
         if(request.getHeader("language")!=null&&!"".equals(request.getHeader("language"))){
             language=request.getHeader("language");
-        }
-        Locale locale=new Locale("zh","CN");//默认中文
-        if(null!=language&&!"".equals(language)&&language.indexOf("_")!=-1){
-            locale=new Locale(language.split("_")[0],language.split("_")[1]);
+            if(null!=language&&!"".equals(language)&&language.indexOf("_")!=-1){
+                locale=new Locale(language.split("_")[0],language.split("_")[1]);
+            }
+        }else {
+            locale=new Locale("zh","CN");//默认中文
         }
         return locale;
     }

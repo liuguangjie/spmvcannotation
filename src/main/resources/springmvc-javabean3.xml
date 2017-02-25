@@ -20,20 +20,15 @@
     </bean>
     <mvc:resources mapping="/css/**" location="/css/" cache-period="86400"/>
     <context:component-scan base-package="cn.springmvc.annotation"/>
-    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <!-- <bean class="org.springframework.http.converter.FormHttpMessageConverter"></bean> -->
-                <bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
-                    <property name="marshaller" ref="aastorMarshaller"></property>
-                    <property name="unmarshaller" ref="aastorMarshaller"></property>
-                </bean>
-                <bean class="org.springframework.http.converter.StringHttpMessageConverter"></bean>
-                <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean>
-            </list>
-        </property>
-    </bean>
+    <mvc:annotation-driven >
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+                <property name="marshaller" ref="aastorMarshaller"></property>
+                <property name="unmarshaller" ref="aastorMarshaller"></property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
 
     <!--
         one
@@ -62,13 +57,11 @@
         </property>
     </bean>
 
-
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="/"/>
         <property name="suffix" value=".jsp"></property>
     </bean>
-
 
 
 </beans>

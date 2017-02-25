@@ -3,6 +3,8 @@ package cn.springmvc.annotation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.ModelAndViewDefiningException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +18,7 @@ import java.util.Map;
 public class Index {
 
     @RequestMapping("/")
-    public String index(Model model){
+    public String index(Model model) throws Exception {
         List<String> datas=new ArrayList<String>();
         datas.add("C++");
         datas.add("java");
@@ -38,6 +40,14 @@ public class Index {
         map2.put("address", "beijing");
         list.add(map2);
         model.addAttribute("list",list);
+        try {
+            int i=1/0;
+        }catch (ArithmeticException a){
+            ModelAndView modelAndView=new ModelAndView();
+            modelAndView.setViewName("index");
+            modelAndView.addObject("message",a.getMessage());
+            throw  new ModelAndViewDefiningException(modelAndView);
+        }
         return "index";
     }
 }

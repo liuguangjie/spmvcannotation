@@ -25,10 +25,15 @@ public final class StudentAction {
     @Autowired
     private StudentService service;
 
+    @Autowired
+    private HttpServletRequest servletRequest;
+
     @RequestMapping(value = "/querystudentlist", method = {RequestMethod.GET})
     public String queryStudens(Model model) {
         List<Student> list = service.getStudents();
         model.addAttribute("list", list);
+        servletRequest.setAttribute("xxxx","ddddd");
+        System.out.println(servletRequest.getSession(true).getId());
         return "studentlist";
     }
 

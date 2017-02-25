@@ -1,8 +1,11 @@
 package cn.springmvc.test;
 
+import cn.springmvc.bean.DateConverter;
 import cn.springmvc.bean.FlightBean;
 import cn.springmvc.bean.Student;
 import cn.springmvc.service.StudentService;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.StaxDriver;
 import org.exolab.castor.mapping.Mapping;
 import org.exolab.castor.xml.MarshalException;
 import org.exolab.castor.xml.Marshaller;
@@ -13,6 +16,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.*;
+import java.util.Date;
 
 /**
  * Created by free on 17-2-7.
@@ -104,5 +108,18 @@ public class BaseTest {
                 read.getNumber() + " departing at " +
                 read.getDepartureTime() +
                 " and arriving at " + read.getArrivalTime());
+    }
+
+    @Test
+    public void testXStream(){
+        XStream xStream=new XStream(new StaxDriver());
+        xStream.registerConverter(new DateConverter());
+        Student student=new Student();
+        student.setId(1);
+        student.setName("ss");
+        student.setAge(33);
+        student.setBirthday(new Date());
+        String s=xStream.toXML(student);
+        System.out.println(s);
     }
 }
