@@ -37,7 +37,7 @@
 
     </bean>
 
-    <bean id="tokenInterceptor" class="cn.springmvc.interceptor.TokenInterceptor"/>
+    <!--<bean id="tokenInterceptor" class="cn.springmvc.interceptor.TokenInterceptor"/>-->
     <!-- 请求拦截器 -->
     <!--<bean class="org.springframework.web.servlet.handler.MappedInterceptor">
         <constructor-arg index="0" >

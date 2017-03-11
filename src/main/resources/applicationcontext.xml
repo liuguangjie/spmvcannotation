@@ -10,7 +10,9 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd"
 >
     <context:property-placeholder location="classpath:jdbc.properties"/>
-    <context:component-scan base-package="cn.springmvc.dao,cn.springmvc.service"/>
+    <context:component-scan base-package="cn.springmvc.dao,cn.springmvc.service">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="${jdbc.driverClassName}" />
@@ -22,7 +24,7 @@
         <property name="idleConnectionTestPeriod" value="180" />
         <property name="maxIdleTime" value="180" />
     </bean>
-
+    <!-- org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy -->
     <bean id="dataSourceTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" >
         <property name="dataSource" ref="dataSource"/>
     </bean>

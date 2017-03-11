@@ -4,6 +4,7 @@ import cn.springmvc.bean.DateConverter;
 import cn.springmvc.bean.FlightBean;
 import cn.springmvc.bean.Student;
 import cn.springmvc.service.StudentService;
+import cn.springmvc.wrap.StudentSrap;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 import org.exolab.castor.mapping.Mapping;
@@ -12,11 +13,17 @@ import org.exolab.castor.xml.Marshaller;
 import org.exolab.castor.xml.Unmarshaller;
 import org.exolab.castor.xml.ValidationException;
 import org.junit.Test;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.MutablePropertyValues;
+import org.springframework.beans.PropertyAccessorFactory;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by free on 17-2-7.
@@ -121,5 +128,61 @@ public class BaseTest {
         student.setBirthday(new Date());
         String s=xStream.toXML(student);
         System.out.println(s);
+    }
+
+
+    /***
+     <tr>
+         <td><input name="studentList[0].id" value="1"></td>
+         <td><input name="studentList[0].name" value="张三"></td>
+         <td><input name="studentList[0].age" value="55"></td>
+         <td><input name="studentList[0].birthday" value="2017-02-10"></td>
+     </tr>
+
+     <tr>
+         <td><input name="studentList[1].id" value="2"></td>
+         <td><input name="studentList[1].name" value="历史"></td>
+         <td><input name="studentList[1].age" value="26"></td>
+         <td><input name="studentList[1].birthday" value="2017-03-11"></td>
+     </tr>
+
+     <tr>
+         <td><input name="studentMap['test1'].id" value="2"></td>
+         <td><input name="studentMap['test1'].name" value="历史"></td>
+         <td><input name="studentMap['test1'].age" value="26"></td>
+         <td><input name="studentMap['test1'].birthday" value="2017-03-11"></td>
+     </tr>
+
+
+     */
+    @Test
+    public void testBeanWrapper(){
+        StudentSrap studentSrap=new StudentSrap();
+        BeanWrapper beanWrapper=PropertyAccessorFactory.forBeanPropertyAccess(studentSrap);
+        beanWrapper.registerCustomEditor(Date.class,new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"),true));
+
+        beanWrapper.setExtractOldValueForEditor(true);
+        beanWrapper.setAutoGrowNestedPaths(true);
+        //beanWrapper.set
+        MutablePropertyValues values=new MutablePropertyValues();
+        values.add("studentList[0].id","1");
+        values.add("studentList[0].name","张三");
+        values.add("studentList[0].age","55");
+        values.add("studentList[0].birthday","2017-02-10");
+        values.add("studentList[1].id","1");
+        values.add("studentList[1].name","历史");
+        values.add("studentList[1].age","26");
+        values.add("studentList[1].birthday","2017-03-11");
+
+        // test map
+        values.add("studentMap['test1'].id","8");
+        values.add("studentMap['test1'].name","张三");
+        values.add("studentMap['test1'].age","122");
+        values.add("studentMap['test1'].birthday","2017-03-12");
+
+        beanWrapper.setPropertyValues(values);
+
+        System.out.println(studentSrap.getStudentList());
+
     }
 }

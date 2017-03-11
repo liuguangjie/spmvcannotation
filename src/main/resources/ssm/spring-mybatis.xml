@@ -14,6 +14,7 @@
 >
 
     <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true"/>
+    <context:component-scan base-package="cn.springmvc.ssm" />
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
         <property name="driverClass" value="${jdbc.driverClassName}"/>
@@ -21,6 +22,7 @@
         <property name="user" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
     </bean>
+    <!-- 解决数据库连接泄漏一个代理 org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy -->
 
     <!-- settings  TransactionManager -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -28,7 +30,7 @@
     </bean>
 
     <!-- define  Advice and  specified  TransactionManager-->
-    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <tx:method name="delete*" propagation="REQUIRED" read-only="false"
                        rollback-for="java.lang.Exception"/>
@@ -47,19 +49,19 @@
     </tx:advice>
 
     <aop:config>
-        <aop:pointcut id="serviceMethods" expression="execution(* cn.springmvc.ssm.dao.UserDaoImpl.*(..))" />
+        <aop:pointcut id="serviceMethods" expression="execution(* cn.springmvc.ssm.service.*.*(..))" />
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods" />
-    </aop:config>-->
+    </aop:config>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <!--<property name="configLocation" value="classpath:ssm/dao/mybatis-dao.xml"/>-->
+        <!--<property name="mapperLocations" value=""/>-->
         <property name="configLocation" value="classpath:ssm/mapper/mybatis-mapper.xml"/>
     </bean>
 
     <!-- Traditional way of  'dao'  -->
-    <!--
-    <bean id="userDao" class="cn.springmvc.ssm.dao.UserDaoImpl">
+    <!--<bean id="userDao" class="cn.springmvc.ssm.dao.UserDaoImpl">
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>-->
 
